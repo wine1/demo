@@ -1,0 +1,118 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+ul{
+	display: flex;
+	width:90%;
+	flex-direction: column;
+}
+li{
+	list-style: none;
+}
+
+ul li ul{
+	display: flex;
+	flex-direction: row;
+
+}
+h1{
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	background-color: #7088ad;
+	text-align: left;
+	padding-left: 10px;
+	display: block;
+	width: 99%;
+}
+
+li[id^=title]{
+	font-size: 20px;
+	color: #333333;
+	background-color: #e6e6e6;
+	text-align: right;
+	padding-right: 5px;
+	flex: 1;
+}
+ii[id^=content]{
+	height:22;
+	background-color:#fafafa;
+	text-align:left;
+	padding-left:2px;
+	flex:2;
+}
+span{
+	color:#ff0000;
+}
+input{
+	width:95%;
+	border-top-style:solid;
+	border-right-style:solid;
+	border-left-style:solid;
+	border-bottom-style:solid;
+	height:18px;
+}
+
+input:read-only{
+	background-color:yellow;
+
+}
+
+input #btnNum{
+	text-align:right;
+}
+
+input #tbxPrice{
+	text-align:right;
+}
+input #tbxMoney{
+	text-align:right;
+}
+div{
+	text-align:right;
+}
+div#buttonDiv{
+	width:100%;
+}
+input[type="button"],input[type="submit"]{
+	font-size:12px;
+	width:70px;
+	height:20px;
+	cursor:hand;
+	border:none;
+	font-family:serif;
+	background-color:#807474;
+	color:white;
+}
+
+div#infoTable{
+	overflow: auto;
+	width: 100%;
+	height: 100%;
+
+}
+
+div#infoTable table{
+	width: 100%;
+	background-color: white;
+	cellpadding:1;
+	cellSpacing:1;
+	font-size: 12px;
+	text-align: center;
+}
+
+div #infoTable table th{
+	height: 22;
+	background-color: white;
+	color: #ffffff;
+	width: 8%;
+}
+div #infoTable table tr{
+	height: 30;
+}
+
+
+
+

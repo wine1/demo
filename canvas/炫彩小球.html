@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="800px" height="500px"></canvas>
+	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<!-- 删除数组中对象自身插件 -->
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+			var arr = ['red','green','black','yellow','gray'];
+			function Ball(x, y) {
+			this.x = x;
+			this.y = y;
+			this.r = 15;
+			this.color = "red";
+			this.dx = Math.random() * 10 - 5;
+			this.dy = Math.random() * 10 - 5;
+			this.dr = Math.random() + 0.3;
+
+			ballArray.push(this);
+			// 将实例化的小球放到数组里面，面向对象的活用
+		}
+
+		Ball.prototype = {
+			update :function() {
+				this.x += this.dx;
+				this.y += this.dy;
+				this.r -= this.dr;
+				if(this.r <= 0){
+					this.r = 0.1;
+					//在数组中删除自己，借助underscroe的API
+					ballArray = _.without(ballArray,this);
+				}
+
+			},
+			render : function() {
+				//绘制圆的API：
+				ctx.beginPath();
+				ctx.arc(this.x , this.y , this.r , 0 , Math.PI * 2 , true);
+				ctx.fillStyle =  arr[Math.floor(Math.random()*4)];
+				ctx.fill();
+			}
+		}
+
+		var ballArray = new Array();
+		
+		setInterval(function() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			for(var i = 0 ; i < ballArray.length ; i++){
+				//update可能把自己删了
+				ballArray[i].update();
+
+				if(ballArray[i]){
+					ballArray[i].render();
+				}
+			}
+		}, 20);
+
+
+		// 监听
+		canvas.addEventListener("mousemove", function(event) {
+			new Ball(event.offsetX, event.offsetY);
+		});
+	</script>
+</body>
+</html> 

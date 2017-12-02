@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="800px" height="500px"></canvas>
+	
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+
+			function Ball(x, y, r, color, speed) {
+			this.x = x;
+			this.y = y;
+			this.r = r;
+			this.color = color;
+			this.speed = speed;
+		}
+
+		Ball.prototype = {
+			update :function() {
+				this.x += this.speed;
+			},
+			render : function() {
+				//绘制圆的API：
+				ctx.beginPath();
+				ctx.arc(this.x , this.y , this.r , 0 , Math.PI * 2 , true);
+				ctx.fillStyle = this.color;
+				ctx.fill();
+			}
+		}
+			// 实例化对象
+		var b = new Ball(100,100,50,"red",3);
+		var b2 = new Ball(200,100, 30, "blue",1);
+
+		setInterval(function() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			b.update();
+			b.render();
+			b2.update();
+			b2.render();
+		}, 20);
+	</script>
+</body>
+</html> 
+<!-- 面向对象的要点，就是要让调用它的不用关心该对象的实现，相当于做成一个接口，直接用就可以了，js是没有类这个概念的，所以理解js的面向对象是个重点也是难点 -->
