@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>留言本</title>
+	<link rel="stylesheet" type="text/css" href="">
+	<script type="text/javascript"></script>
+</head>
+<body>
+
+	<div id="box">
+		<h1>web留言板</h1>
+
+		<textarea id="memo" cols="80" rows="10"></textarea><br>
+		<input type="button" name="button" value="增加" onclick="saveStorage('memo');">
+		<input type="button" name="button" value="初始化" onclick="clearStorage('msg');"><hr>
+		<p id="msg"></p>
+	</div>
+
+
+	<style type="text/css">
+
+		#box {
+			background-image:  url('img/8922136.jpg') ;
+			width: 800px;
+			min-height: 500px;
+		}
+
+		textarea {
+			border-radius: 10px;
+			position: relative;
+			left: 100px;
+		}
+		span{
+			float: right;
+		}
+
+		li{
+			list-style: none;
+			font-size: 16px;
+			margin-right: 50px;
+			line-height: 20px;
+		}
+		input{
+			background-color: grey;
+			border: 1px solid grey;
+			border-radius: 3px;
+			height: 30px;
+			width: 80px;
+			margin-left: 200px;
+		}
+
+
+	</style>
+
+	<script type="text/javascript">
+		
+		function saveStorage(id) {
+			var data = document.getElementById(id).value;
+			var time = new Date().getTime();//用时间做键值，就可以解决键值不能重复的问题 
+			window.localStorage.setItem(time, data);
+			loadStorage('msg');
+		}
+
+		function loadStorage(id) {
+			var result = '<ul>';
+			for(var i = 0; i < window.localStorage.length; i++) {
+				var key = window.localStorage.key(i);
+				var value = window.localStorage.getItem(key);
+				var date = new Date();
+				date.setTime(key); 
+				var dateStr = date.toGMTString();
+				result += '<li>' + value + '<span>' + dateStr + '</span></li>';
+			}
+			result += '</ul>';
+			var target = document.getElementById(id);
+			target.innerHTML = result;
+		}
+
+		function clearStorage() {
+			window.localStorage.clear();
+			loadStorage('msg');
+		}
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跨文档传输实例</title>
+		
+		<style type="text/css">
+			
+
+		</style>
+		
+
+
+		<script type="text/javascript">
+		window.addEventListener("message", function(ev) {
+			if(ev.origin != "http://www.blue-butterfly.net") {
+				return;
+			}
+			alert("从" + ev.origin + "那儿传输过来的消息:\n\" "+ ev.data + " \" ");
+		},false);
+
+		function hello() {
+			var iframe = window.frames[0];
+			iframe.postMessage("你好"，"http://www.blue-butterfly.net/test/");
+		}
+
+	</script>
+
+</head>
+<body>
+
+	<h1>跨域通信实例</h1>
+	<iframe width="400" src="http://www.blue-butterfly.net/test/" onload="hello()"></iframe>
+
+
+</body>
+</html>
