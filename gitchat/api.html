@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>api</title>
+  </head>
+  <body>
+    <!-- jquery offset实现 ：通过递归实现；通过getBoundingClientRect api实现  -->
+    <script>
+      const offset = ele => {
+        let result = {
+          top: 0,
+          left: 0
+        };
+
+        if (window.getComputedStyle(ele)["display"] === "none") {
+          return result;
+        }
+
+        let position;
+        getOffset(ele, true);
+
+        const getOffset = (node, init) => {
+          if (node.nodeType !== 1) {
+            return;
+          }
+          position = window.getComputedStyle(node)["position"];
+
+          if (typeof init === "undefined" && position === "static") {
+            getOffset(node.parentNode);
+            return;
+          }
+
+          if(position === 'fixed') {
+              return;
+          }
+
+          result.top = node.offsetTop + result.top - node.scrollTop;
+          result.left = node.offsetLeft + result.left - node.scrollLeft;
+
+          getOffset(node.parentNode);
+        };
+      };
+    </script>
+  </body>
+</html>
