@@ -7,7 +7,7 @@
     <title>api</title>
   </head>
   <body>
-    <!-- jquery offset实现 ：通过递归实现；通过getBoundingClientRect api实现  -->
+    <!-- jquery offset实现(offset是匹配元素相对于文档的偏移) ：通过递归实现；通过getBoundingClientRect api实现  -->
     <script>
       const offset = ele => {
         let result = {
@@ -33,8 +33,8 @@
             return;
           }
 
-          if(position === 'fixed') {
-              return;
+          if (position === "fixed") {
+            return;
           }
 
           result.top = node.offsetTop + result.top - node.scrollTop;
@@ -43,6 +43,31 @@
           getOffset(node.parentNode);
         };
       };
+    </script>
+
+    <script>
+      const offset = ele => {
+          let result = {
+              top:0,
+              left:0
+          }
+
+          if(!ele.getClientRects().length) {
+              return result
+          }
+
+          if(window.getComputedStyle(ele)['display']==='none') {
+              return result
+          }
+
+          result = ele.getBoundingClientRect();
+          var docElement = ele.ownerDocument.documentElement;
+
+          return {
+              top: result.top + window.pageYOffset - document.clientTop,
+              left: result.left + window.pageXOffset - docElement.clientLeft
+          }
+      }
     </script>
   </body>
 </html>
